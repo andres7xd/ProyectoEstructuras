@@ -145,10 +145,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bola.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuInicio.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bola.h" />
     <ClInclude Include="MenuInicio.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
