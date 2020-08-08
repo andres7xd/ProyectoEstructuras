@@ -10,7 +10,7 @@ MenuInicio* m = new MenuInicio();
 int main()
 {
      
-
+    cout << "hola";
     int cantTubos = 3;
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
 
