@@ -2,9 +2,15 @@
 #include <string> 
 #include <iostream> 
 #include <SFML/Audio.hpp>
+#include "MenuInicio.h"
 using namespace std;
+
+MenuInicio* m = new MenuInicio();
+
 int main()
 {
+     
+
     int cantTubos = 3;
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
 
@@ -118,6 +124,7 @@ int main()
         window.display();
     }
     window.close();
+    m->vistaInicio();
     return 0;
 }
 
