@@ -1,27 +1,27 @@
 ﻿  main.cpp
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(20,23): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(20,23): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(21,24): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(21,24): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(73,93): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(73,93): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(73,72): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(73,72): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
   Generando código
-  1 of 74 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
+  71 of 74 functions (95.9%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  Proyecto I Estructuras.vcxproj -> D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras\x64\Release\Proyecto I Estructuras.exe
+  Proyecto I Estructuras.vcxproj -> D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\ProyectoEstructuras\Proyecto I Estructuras\x64\Release\Proyecto I Estructuras.exe
