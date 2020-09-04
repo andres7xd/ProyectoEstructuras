@@ -148,10 +148,14 @@
     <ClCompile Include="Bola.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuInicio.cpp" />
+    <ClCompile Include="Pila.cpp" />
+    <ClCompile Include="Tubo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bola.h" />
     <ClInclude Include="MenuInicio.h" />
+    <ClInclude Include="Pila.h" />
+    <ClInclude Include="Tubo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

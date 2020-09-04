@@ -1,16 +1,13 @@
-#include <SFML/Graphics.hpp>
-#include <string> 
-#include <iostream> 
-#include <SFML/Audio.hpp>
-#include "MenuInicio.h"
+
+#include "Pila.h"
 using namespace std;
 
 MenuInicio* m = new MenuInicio();
 
 int main()
 {
-     
-    cout << "hola";
+    Pila* pila = new Pila();
+    //cout << "hola";
     int cantTubos = 3;
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
 
@@ -18,7 +15,7 @@ int main()
     window.setKeyRepeatEnabled(false);
 
     sf::Texture image;
-    image.loadFromFile("resourse\\Tubo3.png");
+    image.loadFromFile("resourse\\Tubo4.png");
     sf::Sprite sprite(image);
     sprite.setScale(0.5f,0.5f);
     float imageWidth = (sprite.getTexture()->getSize().x / 2) * 0.5f;
@@ -44,6 +41,8 @@ int main()
     bool play = true;
     sf::Event event;
     bool mouseClicked = false;
+    bool mouseClickedReleased = false;
+    bool mouseClickedTubo = false;
     bool mouseInsideRect = false;
     bool dragging = false;
     sf::Vector2f mouseRectOffset;
@@ -82,6 +81,11 @@ int main()
                     mouseRectOffset.x = event.mouseButton.x - shape2.getGlobalBounds().left - shape2.getOrigin().x;
                     mouseRectOffset.y = event.mouseButton.y - shape2.getGlobalBounds().top - shape2.getOrigin().y;
                     
+                    
+                }
+                if (sprite2.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+                {
+                    mouseClickedTubo = true;
                 }
                 
             }
@@ -89,6 +93,25 @@ int main()
             {
                 mouseClicked = false;
                 dragging = false;
+                if (sprite2.getGlobalBounds().contains(mouseX, mouseY))
+                {
+                    sf::CircleShape shape(0);
+                    shape = shape2;
+                    shape.setFillColor(sf::Color::Red);
+                    pila->push(shape);
+                    shape2.setPosition(sprite2.getPosition().x + imageWidth - shape2.getRadius(), sprite2.getPosition().y + imageHeight - shape2.getRadius());
+                    //shape2 = NULL;
+
+                    //dragging = false;
+                }
+                else {
+                    sf::CircleShape shape(0);
+                    shape = shape2;
+                    shape.setFillColor(sf::Color::Red);
+                    pila->push(shape);
+                    shape2.setPosition(sprite2.getPosition().x + imageWidth - shape2.getRadius(), sprite2.getPosition().y + imageHeight - shape2.getRadius());
+                }
+                mouseClickedReleased = true;
             }
             if (event.type == sf::Event::MouseMoved)
             {
@@ -103,14 +126,30 @@ int main()
         if (dragging == true)
         {
             shape2.setPosition(mouseX - mouseRectOffset.x, mouseY - mouseRectOffset.y);
-            //cout << mouseX << endl;
             
-            if ((mouseX >= sprite2.getPosition().x && mouseY >= sprite2.getPosition().y) && (mouseX <= sprite2.getPosition().x + imageWidth*2 && mouseY <= sprite2.getPosition().y + imageHeight*2)) {
-                //cout << "hola SI entro al if";
-                shape2.setPosition(sprite2.getPosition().x + imageWidth - shape2.getRadius(), sprite2.getPosition().y + imageHeight - shape2.getRadius());
-                dragging = false;
-            }
         }
+        if (mouseClickedTubo == true) {
+            
+            sf::CircleShape shap(0);
+            shap = pila->pop();
+            if (shap.getRadius()!=0) {
+                shape2 = shap;
+                shape2.setPosition(sprite2.getPosition().x + imageWidth - shape2.getRadius(), sprite2.getPosition().y + imageHeight - shape2.getRadius()b);
+            }
+            
+            //cout << mouseX << endl;
+            //cout << pila->pop() << endl;
+            //window.draw(shap);
+            dragging = true;
+            mouseClickedTubo = false;
+            
+        }
+        if (mouseClickedReleased == true) 
+        {
+            
+            mouseClickedReleased == false;
+        }
+        
         //cout << dragging << endl;
         window.clear();
         //window.draw(rect);
@@ -119,12 +158,27 @@ int main()
         window.draw(sprite);
         window.draw(sprite2);
         window.draw(sprite3);
-        
+        /*Tubo* t = pila->top();
+        while (t!=NULL)
+        {
+            sf::CircleShape shap(0);
+            shap = t->getShape();
+            window.draw(shap);
+            t->getAnt();
+        }*/
         
         window.display();
     }
     window.close();
-    m->vistaInicio();
+    //m->vistaInicio();
+    
+    
+    /*pila->push();
+    pila->push();
+    cout << pila->pop()<<endl;
+    cout << pila->pop() << endl;*/
+
+
     return 0;
 }
 
