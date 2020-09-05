@@ -7,7 +7,7 @@ private:
 public:
 	Pila();
 	void push(sf::CircleShape shape2);
-	sf::CircleShape pop();
+	Tubo* pop();
 	Tubo*& top();
 };
 

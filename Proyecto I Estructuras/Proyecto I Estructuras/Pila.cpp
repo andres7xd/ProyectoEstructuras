@@ -34,18 +34,18 @@ void Pila::push(sf::CircleShape shape)
 		aux->setSig(nuevo);*/
 	}
 }
-sf::CircleShape Pila::pop()
+Tubo* Pila::pop()
 {
 	Tubo* aux = new Tubo();
 	int numI;
-	sf::CircleShape shape(0);
-	if (!tope) return shape;
+	//sf::CircleShape shape(0);
+	if (!tope) return NULL;
 	aux = tope;
 	tope = aux->getAnt();
-	numI = aux->getIdTubo();
-	shape = aux->getShape();
-	delete aux;
-	return shape;
+	//numI = aux->getIdTubo();
+	//shape = aux->getShape();
+	//delete aux;
+	return aux;
 }
 Tubo*& Pila::top()
 {
