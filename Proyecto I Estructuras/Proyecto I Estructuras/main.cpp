@@ -7,6 +7,9 @@ MenuInicio* m = new MenuInicio();
 int main()
 {
     Pila* pila = new Pila();
+    Pila* pila2 = new Pila();
+    Pila* pila3 = new Pila();
+    int tubo = 0;
     //cout << "hola";
     int cantTubos = 3;
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
@@ -48,10 +51,10 @@ int main()
     bool mouseInsideRect = false;
     bool dragging = false;
     sf::Vector2f mouseRectOffset;
-    int mouseX = 0;
-    int mouseY = 0;
+    float mouseX = 0;
+    float mouseY = 0;
 
-    int radious = imageWidth - 7;
+    float radious = imageWidth - 7;
     //sf::RectangleShape rect;
     
 
@@ -89,6 +92,30 @@ int main()
             pila->push(shap1);
         }
     }
+
+
+    for (int i = 0; i < 3; i++)
+    {
+
+
+        if (pila2->top() != NULL)
+        {
+            sf::CircleShape shap1(radious);
+            shap1.setFillColor(sf::Color::Green);
+            shap1.setPosition(sprite.getPosition().x + imageWidth - radious, (pila2->top()->getShape()).getPosition().y - 57);
+            pila2->push(shap1);
+        }
+        else {
+            sf::CircleShape shap1(radious);
+            shap1.setFillColor(sf::Color::Red);
+            shap1.setPosition(sprite.getPosition().x + imageWidth - radious, sprite.getPosition().y + imageHeight2 - radious - 32);
+            pila2->push(shap1);
+        }
+    }
+
+
+
+
     /*sf::CircleShape shap1(radious);
     shap1.setFillColor(sf::Color::Green);
     shap1.setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight2 - radious-32);
@@ -114,24 +141,33 @@ int main()
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
             {
                 mouseClicked = true;
-                if (shape2.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-                {
-                    dragging = true;
-                    mouseRectOffset.x = event.mouseButton.x - shape2.getGlobalBounds().left - shape2.getOrigin().x;
-                    mouseRectOffset.y = event.mouseButton.y - shape2.getGlobalBounds().top - shape2.getOrigin().y;
-                    
-                    
-                }
                 if (sprite2.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
                 {
                     dragging = true;
-                    if (aux!=NULL) {
-                        mouseRectOffset.x = event.mouseButton.x - aux->getShape().getGlobalBounds().left - aux->getShape().getOrigin().x;
-                        mouseRectOffset.y = event.mouseButton.y - aux->getShape().getGlobalBounds().top - aux->getShape().getOrigin().y;
-                    }
-                    
+                    tubo = 1;
                     mouseClickedTubo = true;
                 }
+                else {
+                    if (sprite.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+                    {
+                        dragging = true;
+                        tubo = 2;
+                        mouseClickedTubo = true;
+                    }
+                    else {
+                        if (sprite3.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+                        {
+                            dragging = true;
+                            tubo = 3;
+                            mouseClickedTubo = true;
+                        }
+                        else {
+                            tubo = 0;
+                        }
+                    }
+                }
+                
+                
                 
             }
             if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
@@ -146,41 +182,111 @@ int main()
 
                         /*aux->getShape().setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight - radious);
                         pila->push(aux->getShape());*/
-
                         if (pila->top() != NULL)
                         {
 
-                            aux->getShape().setPosition(sprite2.getPosition().x + imageWidth - radious, (pila->top()->getShape()).getPosition().y - 57);
-                            pila->push(aux->getShape());
+                            shape2.setPosition(sprite2.getPosition().x + imageWidth - radious, (pila->top()->getShape()).getPosition().y - 57);
+                            pila->push(shape2);
                         }
                         else {
-                            aux->getShape().setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight2 - radious - 32);
-                            pila->push(aux->getShape());
+                            shape2.setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight2 - radious - 32);
+                            pila->push(shape2);
                         }
+                        tubo = 0;
                         //shape2 = NULL;
                         
                         //dragging = false;
                     }
                     else {
-                        /* sf::CircleShape shape(0);
-                         shape = shape2;
-                         shape.setFillColor(sf::Color::Red);*/
-                        if (pila->top() != NULL)
+                        if (sprite.getGlobalBounds().contains(mouseX, mouseY))
                         {
+                            if (pila2->top() != NULL)
+                            {
 
-                            aux->getShape().setPosition(sprite2.getPosition().x + imageWidth - radious, (pila->top()->getShape()).getPosition().y - 57);
-                            pila->push(aux->getShape());
+                                shape2.setPosition(sprite.getPosition().x + imageWidth - radious, (pila2->top()->getShape()).getPosition().y - 57);
+                                pila2->push(shape2);
+                            }
+                            else {
+                                shape2.setPosition(sprite.getPosition().x + imageWidth - radious, sprite.getPosition().y + imageHeight2 - radious - 32);
+                                pila2->push(shape2);
+                            }
+                            tubo = 0;
                         }
                         else {
-                            aux->getShape().setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight2 - radious - 32);
-                            pila->push(aux->getShape());
+                            if (sprite3.getGlobalBounds().contains(mouseX, mouseY))
+                            {
+                                if (pila3->top() != NULL)
+                                {
+
+                                    shape2.setPosition(sprite3.getPosition().x + imageWidth - radious, (pila3->top()->getShape()).getPosition().y - 57);
+                                    pila3->push(shape2);
+                                }
+                                else {
+                                    shape2.setPosition(sprite3.getPosition().x + imageWidth - radious, sprite3.getPosition().y + imageHeight2 - radious - 32);
+                                    pila3->push(shape2);
+                                }
+                                tubo = 0;
+                            }
+                            else {
+                                if (aux != NULL) {
+                                    if (tubo != 0) {
+                                        if (tubo == 1)
+                                        {
+                                            if (pila->top() != NULL)
+                                            {
+
+                                                shape2.setPosition(sprite2.getPosition().x + imageWidth - radious, (pila->top()->getShape()).getPosition().y - 57);
+                                                pila->push(shape2);
+                                            }
+                                            else {
+                                                shape2.setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight2 - radious - 32);
+                                                pila->push(shape2);
+                                            }
+                                            tubo = 0;
+                                        }
+                                        else {
+                                            if (tubo == 2)
+                                            {
+                                                if (pila2->top() != NULL)
+                                                {
+
+                                                    shape2.setPosition(sprite.getPosition().x + imageWidth - radious, (pila2->top()->getShape()).getPosition().y - 57);
+                                                    pila2->push(aux->getShape());
+                                                }
+                                                else {
+                                                    shape2.setPosition(sprite.getPosition().x + imageWidth - radious, sprite.getPosition().y + imageHeight2 - radious - 32);
+                                                    pila2->push(shape2);
+                                                }
+                                                tubo = 0;
+                                            }
+                                            else {
+                                                if (tubo == 3)
+                                                {
+
+                                                    if (pila3->top() != NULL)
+                                                    {
+
+                                                        shape2.setPosition(sprite3.getPosition().x + imageWidth - radious, (pila3->top()->getShape()).getPosition().y - 57);
+                                                        pila3->push(shape2);
+                                                    }
+                                                    else {
+                                                        shape2.setPosition(sprite3.getPosition().x + imageWidth - radious, sprite3.getPosition().y + imageHeight2 - radious - 32);
+                                                        pila3->push(shape2);
+                                                    }
+
+
+                                                    tubo = 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        /*aux->getShape().setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight - radious);
-                        pila->push(aux->getShape());*/
-                        mouseClickedReleased = false;
                     }
                     aux = NULL;
                 }
+                mouseClickedReleased = false;
                 mouseClicked = false;
                 dragging = false;
                 mouseClickedTubo = false;
@@ -199,14 +305,39 @@ int main()
         
         if (mouseClickedTubo == true) {
             aux = new Tubo();
-            aux = pila->pop();
-            
+            if (tubo != 0) {
+                if (tubo == 1)
+                {
+                    if (pila->top() != NULL) {
+                        aux = pila->pop();
+                    }
+                }
+                else {
+                    if (tubo == 2) {
+                        if (pila2->top() != NULL) {
+                            aux = pila2->pop();
+                        }
+                    }
+                    else {
+                        if (tubo == 3)
+                        {
+                            if (pila3->top()!=NULL) {
+                                aux = pila3->pop();
+                            }
+                            
+                        }
+                        else {
+                            aux = NULL;
+                        }
+                    }
+                }
+            }
             /*sf::CircleShape shap(0);
             shap = aux->getShape();*/
             if (aux!=NULL) {
                 //shape2 = shap;
                 shape2 = aux->getShape();
-                shape2.setPosition(mouseX - mouseRectOffset.x-radious, mouseY - mouseRectOffset.y-radious);
+                shape2.setPosition(mouseX -radious, mouseY -radious);
                 mouseClickedReleased = true;
             }
 
@@ -220,8 +351,9 @@ int main()
         }
         if (dragging == true)
         {
+            mouseClickedReleased = true;
             if (aux != NULL) {
-                shape2.setPosition(mouseX - mouseRectOffset.x-radious, mouseY - mouseRectOffset.y-radious);
+                shape2.setPosition(mouseX - radious, mouseY -radious);
             }
 
 
@@ -246,9 +378,8 @@ int main()
         window.draw(sprite);
         window.draw(sprite2);
         window.draw(sprite3);
-        Tubo* t = pila->top();
 
-        
+        Tubo* t = pila->top();
         while (t!=NULL)
         {
             sf::CircleShape shap(0);
@@ -256,6 +387,26 @@ int main()
             shap = t->getShape();
             window.draw(shap);
             t=t->getAnt();
+        }
+
+        Tubo* t2 = pila2->top();
+        while (t2 != NULL)
+        {
+            sf::CircleShape shap(0);
+            //cout << " ciclo t" << endl;
+            shap = t2->getShape();
+            window.draw(shap);
+            t2 = t2->getAnt();
+        }
+
+        Tubo* t3 = pila3->top();
+        while (t3 != NULL)
+        {
+            sf::CircleShape shap(0);
+            //cout << " ciclo t" << endl;
+            shap = t3->getShape();
+            window.draw(shap);
+            t3 = t3->getAnt();
         }
         //cout << " ciclo a" << endl;
         window.display();
