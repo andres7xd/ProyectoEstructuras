@@ -3,12 +3,42 @@
 using namespace std;
 
 MenuInicio* m = new MenuInicio();
-
+void guardarBola(Pila*& p, sf::Sprite sprite, sf::CircleShape shape, float radious, float imageWidth, float imageHeight2, Tubo* aux ) {
+    if (p->top() != NULL)
+    {
+        shape.setPosition(sprite.getPosition().x + imageWidth - radious, (p->top()->getShape()).getPosition().y - 57);
+        p->push(shape, aux->getColor());
+    }
+    else {
+        shape.setPosition(sprite.getPosition().x + imageWidth - radious, sprite.getPosition().y + imageHeight2 - radious - 32);
+        p->push(shape, aux->getColor());
+    }
+    p->setCantBol(p->getCantBol() + 1);
+}
+Pila* pila = new Pila();
+Pila* pila2 = new Pila();
+Pila* pila3 = new Pila();
+void devolverBola(int tubo, sf::Sprite sprite2, sf::Sprite sprite, sf::Sprite sprite3, sf::CircleShape shape, float radious, float imageWidth, float imageHeight2, Tubo* aux) {
+    if (tubo == 1)
+    {
+        guardarBola(pila, sprite2, shape, radious, imageWidth, imageHeight2, aux);
+    }
+    else {
+        if (tubo == 2)
+        {
+            guardarBola(pila2, sprite, shape, radious, imageWidth, imageHeight2, aux);
+        }
+        else {
+            if (tubo == 3)
+            {
+                guardarBola(pila3, sprite3, shape, radious, imageWidth, imageHeight2, aux);
+            }
+        }
+    }
+}
 int main()
 {
-    Pila* pila = new Pila();
-    Pila* pila2 = new Pila();
-    Pila* pila3 = new Pila();
+    
     int tubo = 0;
     //cout << "hola";
     int cantTubos = 3;
@@ -83,34 +113,36 @@ int main()
             sf::CircleShape shap1(radious);
             shap1.setFillColor(sf::Color::Green);
             shap1.setPosition(sprite2.getPosition().x + imageWidth - radious, (pila->top()->getShape()).getPosition().y - 57);
-            pila->push(shap1);
+            pila->push(shap1, "Green");
         }
         else {
             sf::CircleShape shap1(radious);
             shap1.setFillColor(sf::Color::Red);
             shap1.setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight2 - radious - 32);
-            pila->push(shap1);
+            pila->push(shap1, "Red");
         }
+        pila->setCantBol(pila->getCantBol() + 1);
     }
 
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
 
 
         if (pila2->top() != NULL)
         {
             sf::CircleShape shap1(radious);
-            shap1.setFillColor(sf::Color::Green);
+            shap1.setFillColor(sf::Color::Red);
             shap1.setPosition(sprite.getPosition().x + imageWidth - radious, (pila2->top()->getShape()).getPosition().y - 57);
-            pila2->push(shap1);
+            pila2->push(shap1, "Red");
         }
         else {
             sf::CircleShape shap1(radious);
-            shap1.setFillColor(sf::Color::Red);
+            shap1.setFillColor(sf::Color::Green);
             shap1.setPosition(sprite.getPosition().x + imageWidth - radious, sprite.getPosition().y + imageHeight2 - radious - 32);
-            pila2->push(shap1);
+            pila2->push(shap1, "Green");
         }
+        pila2->setCantBol(pila2->getCantBol() + 1);
     }
 
 
@@ -132,7 +164,7 @@ int main()
     shap4.setFillColor(sf::Color::White);
     shap4.setPosition(sprite2.getPosition().x + imageWidth - radious, shap3.getPosition().y - 57);
     */
-    Tubo* aux = NULL;
+    Tubo * aux = NULL;
     while (play == true)
     {
         
@@ -176,109 +208,68 @@ int main()
                 if (aux != NULL) {
                     if (sprite2.getGlobalBounds().contains(mouseX, mouseY))
                     {
-                        /*sf::CircleShape shape(0);
-                        shape = shape2;
-                        shape.setFillColor(sf::Color::Red);*/
-
-                        /*aux->getShape().setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight - radious);
-                        pila->push(aux->getShape());*/
                         if (pila->top() != NULL)
                         {
-
-                            shape2.setPosition(sprite2.getPosition().x + imageWidth - radious, (pila->top()->getShape()).getPosition().y - 57);
-                            pila->push(shape2);
+                            if (pila->getCantBol() < 4 && aux->getColor() == pila->top()->getColor()) {
+                                guardarBola(pila, sprite2, shape2, radious, imageWidth, imageHeight2, aux);
+                            }
+                            else
+                            {
+                                devolverBola(tubo, sprite2, sprite, sprite3, shape2, radious, imageWidth, imageHeight2, aux);
+                            }
                         }
-                        else {
-                            shape2.setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight2 - radious - 32);
-                            pila->push(shape2);
+                        else
+                        {
+                            guardarBola(pila, sprite2, shape2, radious, imageWidth, imageHeight2, aux);
                         }
-                        tubo = 0;
-                        //shape2 = NULL;
                         
-                        //dragging = false;
+                        tubo = 0;
                     }
                     else {
                         if (sprite.getGlobalBounds().contains(mouseX, mouseY))
                         {
                             if (pila2->top() != NULL)
                             {
-
-                                shape2.setPosition(sprite.getPosition().x + imageWidth - radious, (pila2->top()->getShape()).getPosition().y - 57);
-                                pila2->push(shape2);
+                                if (pila2->getCantBol() < 4 && aux->getColor() == pila2->top()->getColor())
+                                {
+                                    guardarBola(pila2, sprite, shape2, radious, imageWidth, imageHeight2, aux);
+                                }
+                                else
+                                {
+                                    devolverBola(tubo, sprite2, sprite, sprite3, shape2, radious, imageWidth, imageHeight2, aux);
+                                }
                             }
-                            else {
-                                shape2.setPosition(sprite.getPosition().x + imageWidth - radious, sprite.getPosition().y + imageHeight2 - radious - 32);
-                                pila2->push(shape2);
+                            else
+                            {
+                                guardarBola(pila2, sprite, shape2, radious, imageWidth, imageHeight2, aux);
                             }
                             tubo = 0;
                         }
                         else {
                             if (sprite3.getGlobalBounds().contains(mouseX, mouseY))
                             {
-                                if (pila3->top() != NULL)
+                                if (pila3->top()!=NULL)
                                 {
-
-                                    shape2.setPosition(sprite3.getPosition().x + imageWidth - radious, (pila3->top()->getShape()).getPosition().y - 57);
-                                    pila3->push(shape2);
+                                    if (pila3->getCantBol() < 4 && aux->getColor() == pila3->top()->getColor())
+                                    {
+                                        guardarBola(pila3, sprite3, shape2, radious, imageWidth, imageHeight2, aux);
+                                    }
+                                    else
+                                    {
+                                        devolverBola(tubo, sprite2, sprite, sprite3, shape2, radious, imageWidth, imageHeight2, aux);
+                                    }
                                 }
-                                else {
-                                    shape2.setPosition(sprite3.getPosition().x + imageWidth - radious, sprite3.getPosition().y + imageHeight2 - radious - 32);
-                                    pila3->push(shape2);
+                                else
+                                {
+                                    guardarBola(pila3, sprite3, shape2, radious, imageWidth, imageHeight2, aux);
                                 }
                                 tubo = 0;
                             }
                             else {
                                 if (aux != NULL) {
                                     if (tubo != 0) {
-                                        if (tubo == 1)
-                                        {
-                                            if (pila->top() != NULL)
-                                            {
-
-                                                shape2.setPosition(sprite2.getPosition().x + imageWidth - radious, (pila->top()->getShape()).getPosition().y - 57);
-                                                pila->push(shape2);
-                                            }
-                                            else {
-                                                shape2.setPosition(sprite2.getPosition().x + imageWidth - radious, sprite2.getPosition().y + imageHeight2 - radious - 32);
-                                                pila->push(shape2);
-                                            }
-                                            tubo = 0;
-                                        }
-                                        else {
-                                            if (tubo == 2)
-                                            {
-                                                if (pila2->top() != NULL)
-                                                {
-
-                                                    shape2.setPosition(sprite.getPosition().x + imageWidth - radious, (pila2->top()->getShape()).getPosition().y - 57);
-                                                    pila2->push(aux->getShape());
-                                                }
-                                                else {
-                                                    shape2.setPosition(sprite.getPosition().x + imageWidth - radious, sprite.getPosition().y + imageHeight2 - radious - 32);
-                                                    pila2->push(shape2);
-                                                }
-                                                tubo = 0;
-                                            }
-                                            else {
-                                                if (tubo == 3)
-                                                {
-
-                                                    if (pila3->top() != NULL)
-                                                    {
-
-                                                        shape2.setPosition(sprite3.getPosition().x + imageWidth - radious, (pila3->top()->getShape()).getPosition().y - 57);
-                                                        pila3->push(shape2);
-                                                    }
-                                                    else {
-                                                        shape2.setPosition(sprite3.getPosition().x + imageWidth - radious, sprite3.getPosition().y + imageHeight2 - radious - 32);
-                                                        pila3->push(shape2);
-                                                    }
-
-
-                                                    tubo = 0;
-                                                }
-                                            }
-                                        }
+                                        devolverBola(tubo, sprite2, sprite, sprite3, shape2, radious, imageWidth, imageHeight2, aux);
+                                        tubo = 0;
                                     }
                                 }
                             }
@@ -310,12 +301,14 @@ int main()
                 {
                     if (pila->top() != NULL) {
                         aux = pila->pop();
+                        pila->setCantBol(pila->getCantBol() - 1);
                     }
                 }
                 else {
                     if (tubo == 2) {
                         if (pila2->top() != NULL) {
                             aux = pila2->pop();
+                            pila2->setCantBol(pila2->getCantBol() - 1);
                         }
                     }
                     else {
@@ -323,6 +316,7 @@ int main()
                         {
                             if (pila3->top()!=NULL) {
                                 aux = pila3->pop();
+                                pila3->setCantBol(pila3->getCantBol() - 1);
                             }
                             
                         }

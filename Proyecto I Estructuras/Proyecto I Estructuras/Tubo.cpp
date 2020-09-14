@@ -2,13 +2,16 @@
 Tubo::Tubo()
 {
 	idTubo = 0;
+	color = "";
 	sig = NULL;
 	ant = NULL;
+
 	//shape = NULL;
 }
-Tubo::Tubo(int idT, Tubo* s, Tubo* a, sf::CircleShape sp)
+Tubo::Tubo(int idT, string col, Tubo* s, Tubo* a, sf::CircleShape sp)
 {
 	idTubo = idT;
+	color = col;
 	sig = s;
 	ant = a;
 	shape = sp;
@@ -16,6 +19,10 @@ Tubo::Tubo(int idT, Tubo* s, Tubo* a, sf::CircleShape sp)
 void Tubo::setIdTubo(int idT) 
 { 
 	idTubo = idT; 
+}
+void Tubo::setColor(string col)
+{
+	color = col;
 }
 void Tubo::setShape(sf::CircleShape sp)
 {
@@ -32,6 +39,10 @@ void Tubo::setAnt(Tubo* a)
 int Tubo::getIdTubo() 
 { 
 	return idTubo; 
+}
+string Tubo::getColor()
+{
+	return color;
 }
 sf::CircleShape Tubo::getShape() 
 {

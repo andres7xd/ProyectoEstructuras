@@ -1,8 +1,15 @@
 #include "Pila.h"
 Pila::Pila() {
 	tope = NULL;
+	cantidadBol = 0;
 }
-void Pila::push(sf::CircleShape shape)
+void Pila::setCantBol(int can) {
+	cantidadBol = can;
+}
+int Pila::getCantBol() {
+	return cantidadBol;
+}
+void Pila::push(sf::CircleShape shape, string color)
 {
 	Tubo* aux = NULL;
 	float suma = 0;
@@ -10,7 +17,7 @@ void Pila::push(sf::CircleShape shape)
 	{
 		suma = 0;
 		Tubo* nuevo = new Tubo();
-		nuevo = new Tubo(1, NULL, NULL,shape);
+		nuevo = new Tubo(1, color, NULL, NULL,shape);
 		tope = nuevo;
 		//ini = nuevo;
 	}
@@ -21,7 +28,7 @@ void Pila::push(sf::CircleShape shape)
 		num += 1;
 		Tubo* nuevo = new Tubo();
 		//tope->setSig(nuevo);
-		nuevo = new Tubo(num, NULL, tope,shape);
+		nuevo = new Tubo(num, color, NULL, tope,shape);
 		tope = nuevo;
 		/*aux = ini;
 		while (aux->getSig() != NULL)

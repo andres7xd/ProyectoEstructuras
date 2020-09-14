@@ -3,10 +3,14 @@
 class Pila
 {
 private:
+	int cantidadBol;
 	Tubo* tope;
+	
 public:
 	Pila();
-	void push(sf::CircleShape shape2);
+	void setCantBol(int can);
+	int getCantBol();
+	void push(sf::CircleShape shape2, string color);
 	Tubo* pop();
 	Tubo*& top();
 };
