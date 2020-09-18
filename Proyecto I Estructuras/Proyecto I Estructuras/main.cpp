@@ -78,6 +78,50 @@ void llenarTubo(Pila*& pila, sf::Sprite sprite, int num)
     
  
 }
+int validarRand(int num, int color[], int bol[], bool var) {
+    while (var != false)
+    {
+        if (num != color[0] && num != color[1]) {
+            num = 1 + rand() % 6;
+        }
+        else {
+            if (bol[0] >= 4 && bol[1] >= 4) {
+                var = false;
+            }
+            else {
+                if (num == color[0]) {
+                    if (bol[0] >= 4) {
+                        num = 1 + rand() % 6;
+                    }
+                    else
+                    {
+                        var = false;
+                    }
+                }
+                else {
+                    if (num == color[1]) {
+                        if (bol[1] >= 4) {
+                            num = 1 + rand() % 6;
+                        }
+                        else
+                        {
+                            var = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (num == color[0]) {
+        bol[0] = bol[0] + 1;       
+    }
+    else {
+        if (num == color[1]) {
+            bol[1] = bol[1] + 1;         
+        }
+    }
+    return num;
+}
 int main()
 {
     
@@ -210,52 +254,14 @@ int main()
     {   
         num = 1 + rand() % 6;
         var = true;
-        while (var!=false)
-        {
-            if (num!=color[0] && num != color[1]) {
-                num = 1 + rand() % 6;
-            }
-            else {
-                var = false;
-            }
-        }
-        if (num == color[0]) {
-            if (bol[0]<4) {
-                bol[0] = bol[0] + 1;
-            }
-        }
-        else {
-            if (num == color[1]) {
-                if (bol[1] < 4) {
-                    bol[1] = bol[1] + 1;
-                }
-            }
-        }
+        num = validarRand(num,color,bol,var);
+
         llenarTubo(pila, sprite2, num);
         cout << num ;
         num = 1 + rand() % 6;
         var = true;
-        while (var != false)
-        {
-            if (num != color[0] && num != color[1]) {
-                num = 1 + rand() % 6;
-            }
-            else {
-                var = false;
-            }
-        }
-        if (num == color[0]) {
-            if (bol[0] < 4) {
-                bol[0] = bol[0] + 1;
-            }
-        }
-        else {
-            if (num == color[1]) {
-                if (bol[1] < 4) {
-                    bol[1] = bol[1] + 1;
-                }
-            }
-        }
+        num = validarRand(num, color, bol, var);
+
         llenarTubo(pila2, sprite, num);
         cout << num << endl;
         
