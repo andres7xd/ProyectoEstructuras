@@ -1,17 +1,20 @@
-#include "Tubo.h"
+#include "Bola.h"
 #pragma once
 class Pila
 {
 private:
 	int cantidadBol;
-	Tubo* tope;
+	Bola* tope;
+	bool tuboComp;//Verificador si esta lleno de bolas del mismo color
 	
 public:
 	Pila();
 	void setCantBol(int can);
+	void setTComp(bool c);
 	int getCantBol();
+	bool getTComp();
 	void push(sf::CircleShape shape2, string color);
-	Tubo* pop();
-	Tubo*& top();
+	Bola* pop();
+	Bola*& top();
 };
 

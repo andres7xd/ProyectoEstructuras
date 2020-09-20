@@ -2,22 +2,31 @@
 Pila::Pila() {
 	tope = NULL;
 	cantidadBol = 0;
+	tuboComp = false;
 }
 void Pila::setCantBol(int can) {
 	cantidadBol = can;
 }
+void Pila::setTComp(bool c)
+{
+	tuboComp = c;
+}
 int Pila::getCantBol() {
 	return cantidadBol;
 }
+bool Pila::getTComp()
+{
+	return tuboComp;
+}
 void Pila::push(sf::CircleShape shape, string color)
 {
-	Tubo* aux = NULL;
+	Bola* aux = NULL;
 	float suma = 0;
 	if (!tope)
 	{
 		suma = 0;
-		Tubo* nuevo = new Tubo();
-		nuevo = new Tubo(1, color, NULL, NULL,shape);
+		Bola* nuevo = new Bola();
+		nuevo = new Bola(1, color, NULL, NULL,shape);
 		tope = nuevo;
 		//ini = nuevo;
 	}
@@ -26,9 +35,9 @@ void Pila::push(sf::CircleShape shape, string color)
 		int num = 0;
 		num = tope->getIdTubo();
 		num += 1;
-		Tubo* nuevo = new Tubo();
+		Bola* nuevo = new Bola();
 		//tope->setSig(nuevo);
-		nuevo = new Tubo(num, color, NULL, tope,shape);
+		nuevo = new Bola(num, color, NULL, tope,shape);
 		tope = nuevo;
 		/*aux = ini;
 		while (aux->getSig() != NULL)
@@ -41,9 +50,9 @@ void Pila::push(sf::CircleShape shape, string color)
 		aux->setSig(nuevo);*/
 	}
 }
-Tubo* Pila::pop()
+Bola* Pila::pop()
 {
-	Tubo* aux = new Tubo();
+	Bola* aux = new Bola();
 	int numI;
 	//sf::CircleShape shape(0);
 	if (!tope) return NULL;
@@ -54,7 +63,7 @@ Tubo* Pila::pop()
 	//delete aux;
 	return aux;
 }
-Tubo*& Pila::top()
+Bola*& Pila::top()
 {
 	return tope;
 }
