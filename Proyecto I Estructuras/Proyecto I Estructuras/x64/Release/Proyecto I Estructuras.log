@@ -1,103 +1,103 @@
 ﻿  main.cpp
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(199,23): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(200,23): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(200,24): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(201,24): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(240,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(276,94): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(241,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(277,94): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(276,73): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(277,73): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(283,97): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(284,97): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(283,76): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(284,76): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(290,102): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(291,102): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(290,81): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(291,81): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(389,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(390,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(511,23): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(390,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(391,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(515,23): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(512,24): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(516,24): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(560,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(603,94): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(571,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(614,94): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(603,73): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(614,73): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(610,97): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(621,97): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(610,76): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(621,76): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(617,102): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(628,102): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(617,81): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(628,81): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(624,106): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(635,106): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(624,85): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(635,85): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(751,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(752,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(762,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(763,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
   Generando código
-  5 of 129 functions ( 3.9%) were compiled, the rest were copied from previous compilation.
+  3 of 139 functions ( 2.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  Proyecto I Estructuras.vcxproj -> D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\Proyecto I Estructuras\x64\Release\Proyecto I Estructuras.exe
+  Proyecto I Estructuras.vcxproj -> C:\Users\andre\Desktop\UNA\II Ciclo 2020\Estructuras de datos\ProyectoEstructuras\ProyectoEstructuras\Proyecto I Estructuras\x64\Release\Proyecto I Estructuras.exe

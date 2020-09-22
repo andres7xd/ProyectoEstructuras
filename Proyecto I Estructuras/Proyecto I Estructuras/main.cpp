@@ -1,5 +1,6 @@
 
 #include "Pila.h"
+#include "ListaTubo.h"
 using namespace std;
 Pila* pila = new Pila();
 Pila* pila2 = new Pila();
@@ -487,6 +488,7 @@ void nivel1() {
     window.close();
 }
 void nivel2() {
+
     int tubo = 0;
     int cantTubos = 4;
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
@@ -498,6 +500,8 @@ void nivel2() {
     image.loadFromFile("resourse\\Tubo4.png");
     sf::Sprite sprite(image);
     sprite.setScale(0.5f, 0.5f);
+
+    
 
     sf::Texture image2;
     image2.loadFromFile("resourse\\TuboTope.png");
@@ -514,6 +518,12 @@ void nivel2() {
 
     sprite.setPosition(windowWidth - imageWidth, windowHeight - imageHeight);
     spriteTope.setPosition(windowWidth - imageWidth, windowHeight - imageHeight);
+    ///////////////////////////////////////////////////////////////////////////////sprite
+    ListaTubo Lt;
+    Lt.AgregarTubo(pila, sprite);
+    Lt.AgregarTubo(pila2, sprite);
+    cout << Lt.getIni()->getId();
+    cout << Lt.getIni()->getSig()->getId();
 
     sf::Sprite sprite2(image);
     sprite2.setScale(0.5f, 0.5f);
@@ -523,6 +533,7 @@ void nivel2() {
 
     sprite2.setPosition(windowWidth - imageWidth - 150, windowHeight - imageHeight);
     spriteTope2.setPosition(windowWidth - imageWidth - 150, windowHeight - imageHeight);
+
 
     sf::Sprite sprite3(image);
     sprite3.setScale(0.5f, 0.5f);
@@ -853,7 +864,9 @@ void nivel2() {
         {
             window.draw(shape2);
         }
-        window.draw(sprite);
+   
+        window.draw(Lt.getIni()->getSf());
+    /*    window.draw(sprite);*/
         window.draw(sprite2);
         window.draw(sprite3);
         window.draw(sprite4);
@@ -871,15 +884,18 @@ int main()
 {
     nivel1();
     tubosllenos = 0;
-    float imageWidth = 0;
-    float radious = 0;
-    float imageHeight = 0;
-    float imageHeight2 = 0;
+     imageWidth = 0;
+     radious = 0;
+     imageHeight = 0;
+     imageHeight2 = 0;
     pila = new Pila();
     pila2 = new Pila();
     pila3 = new Pila();
     pila4 = new Pila();
     nivel2();
+
+    
+ 
 
     return 0;
 }
