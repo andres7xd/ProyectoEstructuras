@@ -2,7 +2,6 @@
 
 
 ListaTubo::ListaTubo() {
-
 	ini = NULL;
 }
 
