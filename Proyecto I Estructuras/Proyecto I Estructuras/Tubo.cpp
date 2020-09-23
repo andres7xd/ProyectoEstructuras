@@ -55,7 +55,7 @@ int Tubo::getId() {
 	return idTubo;
 }
 
-Pila* Tubo::getPila() {
+Pila*& Tubo::getPila() {
 	return pilas;
 }
 
