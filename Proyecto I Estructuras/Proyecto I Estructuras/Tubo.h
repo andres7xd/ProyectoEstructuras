@@ -16,7 +16,7 @@ public:
 	void setSf(sf::Sprite Sprite);
 
 	sf::Sprite getSf();
-	Pila*& getPila();
+	Pila* getPila();
 	Tubo* getSig();
 	Tubo* getAnt();
 	int getId();
