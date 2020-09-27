@@ -8,6 +8,8 @@ float radious = 0;
 float imageHeight = 0;
 float imageHeight2 = 0;
 int tubosllenos = 0;
+sf::Texture image;
+sf::Texture image2;
 
 MenuInicio* m = new MenuInicio();
 
@@ -135,10 +137,36 @@ bool verificarTubos(Pila* pila) {
         tubo = tubo->getAnt();
     }
     if (n==4) {
-        tubosllenos++;
         return true;
     }
     return false;
+}
+int contarBolasColor(Pila* pila) {
+    Bola* tubo = pila->top();
+    int n = 0;
+    Bola* aux = pila->top();
+    while (tubo != NULL)
+    {
+        if (tubo->getColor() == aux->getColor()) {
+            n++;
+        }
+        else {
+            return n;
+        }
+        aux = tubo;
+        tubo = tubo->getAnt();
+    }
+    return n;
+}
+int contarBolas(Pila* pila) {
+    Bola* tubo = pila->top();
+    int n = 0;
+    while (tubo != NULL)
+    {
+        n++;
+        tubo = tubo->getAnt();
+    }
+    return n;
 }
 void asignarColor(int n, int color[],int num, bool var) {
     bool var2 = false;
@@ -165,10 +193,174 @@ void asignarColor(int n, int color[],int num, bool var) {
         color[i] = num;
     }
 }
+bool validar(Tubo* t,Tubo*t2, int ncol) {
+    Tubo* t3 = t;
 
+    if (t2!=NULL) {
+        Pila* p = t2->getPila();
+        if (p->top()!=NULL) {
+            string color = t2->getPila()->top()->getColor();
+            string color2 = t3->getPila()->top()->getColor();
+            bool val = true;
+            while (val == true)
+            {
+                if (t3 != t2) {
+                    if (t3 == NULL ) {
+                        val = false;
+                    }
+                    else {
+                        if (color == color2 || t3->getPila()->top() == NULL) {
+                            if (contarBolasColor(t2->getPila())<=(4-contarBolas(t3->getPila()))) {
+                                Bola* b = t2->getPila()->pop();
+                                t3->getPila()->push(b->getShape(), b->getColor());
+                                if (verificarTubos(t3->getPila()))
+                                {
+                                    tubosllenos++;
+                                }
+                                
+                            }
+                            else {
+                                Tubo* tt = t2->getSig();
+                                if (validar(t, tt, ncol))
+                                {
+                                    return true;
+                                }
+                            }
+                            
+                            Tubo* ttt = t2;
+                            if (validar(t, ttt, ncol))
+                            {
+                                return true;
+                            }
+                            val = false;
+                        }
+                        else {
+                            t3 = t3->getSig();
+                            color2 = t3->getPila()->top()->getColor();
+                        }
+                    }
+                }
+                else {
+                    t3 = t3->getSig();
+                    //color2 = t3->getPila()->top()->getColor();
+                }
+
+            }
+            
+        }
+        
+    }
+    if (tubosllenos==ncol) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    
+}
+void guardar(Tubo* tubo, sf::Sprite sprite, float x, float y) {
+    if (sprite.getGlobalBounds().contains(x, y)) {
+        string dato = "";
+        ofstream file;
+        file.open("save\\archivo.txt");
+        
+        while (tubo!=NULL)
+        {
+            dato = "!";
+            Bola* b = tubo->getPila()->top();
+            string dato2 = "";
+            while (b!=NULL)
+            {
+                string color = b->getColor();
+                if (color=="Blue") {
+                    dato2 = "@" + dato2;
+                }
+                else if(color == "White"){
+                    dato2 = "#" + dato2;
+                }
+                else if (color == "Green") {
+                    dato2 = "$" + dato2;
+                }
+                else if (color == "Red") {
+                    dato2 = "%" + dato2;
+                }
+                else if (color == "Magenta") {
+                    dato2 = "&" + dato2;
+                }
+                else if (color == "Yellow") {
+                    dato2 = "*" + dato2;
+                }
+                b = b->getAnt();
+            }
+            tubo = tubo->getSig();
+            file << dato + dato2 + "\n";
+        }
+        file.close();
+    }
+    
+}
+void cargarPartida(float windowWidth, float windowHeight) {
+   
+    char cadena[5];
+    int con = 0;
+    int ncol = 0;
+    char cadena2[5];
+    ifstream fe2("save\\archivo.txt");
+    while (!fe2.eof()) {
+        ncol++;
+        fe2 >> cadena2;
+    }
+    fe2.close();
+    ncol -= 1;
+    int n = (ncol) * 75;
+    ifstream fe("save\\archivo.txt");
+    int contador = 0;
+    while (!fe.eof()) {
+        fe >> cadena;
+        if (contador < ncol) {
+            sf::Sprite sprite(image);
+            sprite.setScale(0.5f, 0.5f);
+            sprite.setPosition((windowWidth - n) + con - imageWidth, windowHeight - imageHeight);
+            Pila* p = new Pila();
+            for (int i = 1; i < 5; i++)
+            {
+
+                switch (cadena[i])
+                {
+                case '@':
+                    llenarTubo(p, sprite, 1);
+                    break;
+                case '#':
+                    llenarTubo(p, sprite, 2);
+                    break;
+                case '$':
+                    llenarTubo(p, sprite, 3);
+                    break;
+                case '%':
+                    llenarTubo(p, sprite, 4);
+                    break;
+                case '&':
+                    llenarTubo(p, sprite, 5);
+                    break;
+                case '*':
+                    llenarTubo(p, sprite, 6);
+                    break;
+                case ' ':
+
+                default: break;
+                }
+                cadena[i] = ' ';
+            }
+            Lt->AgregarTubo(p, sprite);
+            con += 150;
+        }
+        contador++;
+    }
+    fe.close();
+}
 void nivel(int nivel) {
     //ListaTubo
-    Lt = new ListaTubo();
+    
     int tubo = 0;
     int cantTubos = 4;
     int ncol = nivel + 1;
@@ -183,7 +375,10 @@ void nivel(int nivel) {
     imageHeight = 0;
     imageHeight2 = 0;
     tubosllenos = 0;
+
+    image.loadFromFile("resourse\\Tubo4.png");
     
+    image2.loadFromFile("resourse\\TuboTope.png");
 
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
 
@@ -193,59 +388,88 @@ void nivel(int nivel) {
     sf::CircleShape shape2(imageWidth - 7);
     shape2.setFillColor(sf::Color::Green);
 
-    sf::Texture image;
-    image.loadFromFile("resourse\\Tubo4.png");
+    
     sf::Sprite spri(image);
     spri.setScale(0.5f, 0.5f);
 
-    sf::Texture image2;
-    image2.loadFromFile("resourse\\TuboTope.png");
+    
+
+    
 
     imageWidth = (spri.getTexture()->getSize().x / 2) * 0.5f;
     float imageWidth2 = (spri.getTexture()->getSize().x) * 0.5f;
     imageHeight = (spri.getTexture()->getSize().y / 2) * 0.5f;
     imageHeight2 = (spri.getTexture()->getSize().y) * 0.5f;
 
+
     float windowWidth = window.getSize().x / 2;
     float windowHeight = window.getSize().y / 2;
 
+    sf::Texture image3;
+    image3.loadFromFile("resourse\\Guardar.png");
+    sf::Sprite spri2(image3);
+    spri.setScale(0.5f, 0.5f);
+    spri2.setPosition((windowWidth*2) -80, 10);
+
     int n = (ncol) * 75;
-
-
-    radious = imageWidth - 7;
-    srand(time(0));
-    
-    for (int i = 0; i < 6; i++)
-    {
-        bol[i] = 0;
-        color[i] = 0;
-    }
-    
-
-    asignarColor(ncol, color, num, var);
-    
-    for (int i = 0; i < ncol+1; i++)
-    {
-        sf::Sprite sprite(image);
-        sprite.setScale(0.5f, 0.5f);
-        sprite.setPosition((windowWidth - n) + con - imageWidth, windowHeight - imageHeight);
-
-        Pila* pil = new Pila();
-        var = true;
-        if (i < ncol) {
-            for (int i = 0; i < 4; i++)
-            {
-                num = 1 + rand() % 6;
-                var = true;
-                num = validarRand(num, color, bol, var, ncol);
-                llenarTubo(pil, sprite, num);
-            }
-        }
-        Lt->AgregarTubo(pil, sprite);
-        con += 150;
-    }
-
+    bool cargar = true;
+    //bool cargar = false;
     bool play = true;
+    radious = imageWidth - 7;
+    if (cargar == true) {
+        Lt = new ListaTubo();
+        cargarPartida(windowWidth, windowHeight);
+    }
+    else {
+        srand(time(NULL));
+
+        for (int i = 0; i < 6; i++)
+        {
+            bol[i] = 0;
+            color[i] = 0;
+        }
+
+
+        asignarColor(ncol, color, num, var);
+
+
+        
+        while (play == true)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                bol[i] = 0;
+            }
+            Lt = new ListaTubo();
+            for (int i = 0; i < ncol + 1; i++)
+            {
+                sf::Sprite sprite(image);
+                sprite.setScale(0.5f, 0.5f);
+                sprite.setPosition((windowWidth - n) + con - imageWidth, windowHeight - imageHeight);
+
+                Pila* pil = new Pila();
+                var = true;
+                if (i < ncol) {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        num = 1 + rand() % 6;
+                        var = true;
+                        num = validarRand(num, color, bol, var, ncol);
+                        llenarTubo(pil, sprite, num);
+                    }
+                }
+                Lt->AgregarTubo(pil, sprite);
+                con += 150;
+            }
+            //if (validar(Lt->getIni(), Lt->getIni(),ncol))
+            //{
+            play = false;
+            //}
+        }
+        play = true;
+    }
+    
+    
     sf::Event event;
     bool mouseClicked = false;
     bool mouseClickedReleased = false;
@@ -265,16 +489,24 @@ void nivel(int nivel) {
             {
                 mouseClicked = true;
                 Tubo* t = Lt->getIni();
+                guardar(t, spri2, event.mouseButton.x, event.mouseButton.y);
                 while (t!=NULL)
                 {
                     if (t->getSf().getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
                     {
-                        dragging = true;
-                        tubo = t->getId();
-                        mouseClickedTubo = true;
-                    }
+                        if (!verificarTubos(t->getPila())) {
+                            
+                            tubo = t->getId();
+                            mouseClickedTubo = true;
+                        }
+                        else
+                        {
+                            tubo = 0;
+                        }
+                    } 
                     t = t->getSig();
                 }
+                
             }
             if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
             {
@@ -289,7 +521,11 @@ void nivel(int nivel) {
                             {
                                 if (p->getCantBol() < 4 && aux->getColor() == p->top()->getColor()) {
                                     guardarBola(p, t->getSf(), shape2, aux->getColor());
-                                    p->setTComp(verificarTubos(p));
+                                    if (verificarTubos(p))
+                                    {
+                                        p->setTComp(true);
+                                        tubosllenos++;
+                                    }
                                 }
                                 else
                                 {
@@ -304,7 +540,11 @@ void nivel(int nivel) {
                             else
                             {
                                 guardarBola(p, t->getSf(), shape2, aux->getColor());
-                                p->setTComp(verificarTubos(p));
+                                if (verificarTubos(p))
+                                {
+                                    p->setTComp(true);
+                                    tubosllenos++;
+                                }
                             }
                             tubo = 0;
                         }
@@ -344,6 +584,7 @@ void nivel(int nivel) {
         if (mouseClickedTubo == true) {
             aux = new Bola();
             if (tubo != 0) {
+                dragging = true;
                 Tubo* t = Lt->getIni();
                 while (tubo != t->getId()) {
 
@@ -356,24 +597,28 @@ void nivel(int nivel) {
                 }else {
                     aux = NULL;
                 }      
+                if (aux != NULL) {
+                    shape2 = aux->getShape();
+                    shape2.setPosition(mouseX - radious, mouseY - radious);
+                    mouseClickedReleased = true;
+                }
             }
-            if (aux != NULL) {
-                shape2 = aux->getShape();
-                shape2.setPosition(mouseX - radious, mouseY - radious);
-                mouseClickedReleased = true;
-            }
+            
             mouseClickedTubo = false;
         }
         if (dragging == true)
         {
-            mouseClickedReleased = true;
+            
             if (aux != NULL) {
+                mouseClickedReleased = true;
                 shape2.setPosition(mouseX - radious, mouseY - radious);
             }
         }
         
         window.clear();
+        window.draw(spri2);
         Tubo* t = Lt->getIni();
+        
         while (t != NULL)
         {
             sf::Sprite spriteTope(image2);
@@ -402,6 +647,11 @@ void nivel(int nivel) {
             t2 = t2->getSig();
         }
         
+        if (tubosllenos==nivel+1)
+        {
+            //system("Pause");
+            play = false;
+        }
 
         
         window.display();
@@ -411,12 +661,11 @@ void nivel(int nivel) {
 int main()
 {
     nivel(1);
-    nivel(2);
+    
+    /*nivel(2);
     nivel(3);
     nivel(4);
-    nivel(5);
-    
- 
+    nivel(5);*/
 
     return 0;
 }

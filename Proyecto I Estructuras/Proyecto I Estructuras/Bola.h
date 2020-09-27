@@ -5,6 +5,7 @@
 #include <iostream> 
 #include <SFML/Audio.hpp>
 #include "MenuInicio.h"
+#include <fstream>
 
 using namespace std;
 class Bola

@@ -1,31 +1,32 @@
-﻿  ListaTubo.cpp
-  main.cpp
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(209,23): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
+﻿  main.cpp
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(405,23): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(210,24): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(406,24): warning C4244: 'inicializando': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(216,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(270,101): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(424,19): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(492,73): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(492,52): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(495,101): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(270,80): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(495,80): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(336,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(337,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(576,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\Proyecto I Estructuras\main.cpp(577,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
   Generando código
-  5 of 125 functions ( 4.0%) were compiled, the rest were copied from previous compilation.
+  1 of 246 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    11 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   Proyecto I Estructuras.vcxproj -> D:\Documentos\II semestre 2020\Estructuras\Proyecto I Estructuras2\2\1\Proyecto I Estructuras\x64\Release\Proyecto I Estructuras.exe
