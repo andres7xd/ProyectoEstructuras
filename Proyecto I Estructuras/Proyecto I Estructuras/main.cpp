@@ -9,12 +9,14 @@ float imageWidth = 0;
 float radious = 0;
 float imageHeight = 0;
 float imageHeight2 = 0;
+float windowWidth = 0;
+float windowHeight = 0;
 int tubosllenos = 0;
 sf::Texture image;
 sf::Texture image2;
 bool cargar = false;
 
-MenuInicio* m = new MenuInicio();
+Menus* m = new Menus();
 
 
 void guardarBola(Pila*& p, sf::Sprite sprite, sf::CircleShape shape, string color ) {
@@ -144,9 +146,9 @@ bool verificarTubos(Pila* pila) {
     }
     return false;
 }
-bool verificarTubos2(Tubo* tubo, int ncol) {
+bool verificarTubos2(Tubo* tubo, int ncol, int numTubo) {
     int tubLL = 0;
-    for (int i = 0; i <= ncol; i++)
+    for (int i = 0; i <= numTubo; i++)
     {
         Bola* bola = tubo->getPila()->top();
         int n = 0;
@@ -289,7 +291,7 @@ bool validar(Tubo* t,Tubo*t2, int ncol) {
     }
     
 }
-bool validar2(Tubo* tubo, Tubo* tubo2, int ncol) {
+bool validar2(Tubo* tubo, Tubo* tubo2, int ncol, int numTubo) {
     Tubo* t = tubo;
     Tubo* t2 = tubo2;
     while (t != NULL) {
@@ -313,7 +315,7 @@ bool validar2(Tubo* tubo, Tubo* tubo2, int ncol) {
                                     if (!verificarTubos(t2->getPila())) {
                                         b = t->getPila()->pop();
                                         guardarBola(t2->getPila(), t2->getSf(), b->getShape(), b->getColor());
-                                        if (validar2(tubo, tubo2, ncol)) {
+                                        if (validar2(tubo, tubo2, ncol,numTubo)) {
                                             //var = false;
                                             return true;
                                         }
@@ -332,7 +334,7 @@ bool validar2(Tubo* tubo, Tubo* tubo2, int ncol) {
                         //}
                     }
                 }
-                else if (validar2(tubo, tubo2->getSig(), ncol)) {
+                else if (validar2(tubo, tubo2->getSig(), ncol, numTubo)) {
                     return true;
                 }
             }
@@ -340,7 +342,7 @@ bool validar2(Tubo* tubo, Tubo* tubo2, int ncol) {
         }
         t = t->getSig();
     }
-    if (verificarTubos2(tubo, ncol)) {
+    if (verificarTubos2(tubo, ncol, numTubo)) {
         return true;
     }
     else {
@@ -387,7 +389,7 @@ void guardar(Tubo* tubo, string f) {
     file.close();
 
 }
-void cargarPartida(float windowWidth, float windowHeight, string f) {
+void cargarPartida(string f) {
 
     char cadena[5];
 
@@ -454,7 +456,7 @@ void cargarPartida(float windowWidth, float windowHeight, string f) {
 }
 void mapa(int nivel) {
     //ListaTubo
-    
+    int numTubo = 0;
     int tubo = 0;
     int cantTubos = 4;
     int ncol = nivel + 1;
@@ -471,7 +473,6 @@ void mapa(int nivel) {
     tubosllenos = 0;
 
     image.loadFromFile("resourse\\Tubo4.png");
-    
     image2.loadFromFile("resourse\\TuboTope.png");
 
     sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
@@ -491,33 +492,53 @@ void mapa(int nivel) {
     
 
     imageWidth = (spri.getTexture()->getSize().x / 2) * 0.5f;
-    float imageWidth2 = (spri.getTexture()->getSize().x) * 0.5f;
+    //float imageWidth2 = (spri.getTexture()->getSize().x) * 0.5f;
     imageHeight = (spri.getTexture()->getSize().y / 2) * 0.5f;
     imageHeight2 = (spri.getTexture()->getSize().y) * 0.5f;
-
-
-    float windowWidth = window.getSize().x / 2;
-    float windowHeight = window.getSize().y / 2;
+    windowWidth = window.getSize().x / 2;
+    windowHeight = window.getSize().y / 2;
 
     sf::Texture image3;
     image3.loadFromFile("resourse\\Guardar.png");
     sf::Sprite btnGuardar(image3);
-    //btnGuardar.setScale(0.5f, 0.5f);
-    btnGuardar.setPosition((windowWidth * 2) - 80, 10);
-    //sf::Texture image4;
-    //image4.loadFromFile("resourse\\Guardar.png");
-    sf::Sprite btnVolver(image3);
-    //btnGuardar.setScale(0.5f, 0.5f);
-    btnVolver.setPosition((windowWidth * 2) - 160, 10);
+    btnGuardar.setScale(0.48f, 0.548f);
+    btnGuardar.setPosition((windowWidth * 2) - 165, 10);
+    sf::Texture image4;
+    image4.loadFromFile("resourse\\Atras.png");
+    sf::Sprite btnVolver(image4);
+    btnVolver.setScale(0.48f, 0.42f);
+    btnVolver.setPosition((windowWidth * 2) - 280, 10);
+
+    sf::Texture imgReset;
+    imgReset.loadFromFile("resourse\\Reiniciar.png");
+    sf::Sprite btnReset(imgReset);
+    btnReset.setScale(0.48f, 0.548f);
+    btnReset.setPosition(windowWidth-imgReset.getSize().y+15, 10);
 
     int n = (ncol) * 75;
     //bool cargar = true;
     
+    if (nivel==1) {
+        numTubo = 2;
+    }
+    else if (nivel == 2) {
+        numTubo = 3;
+    }
+    else if (nivel == 3) {
+        numTubo = 5;
+    }
+    else if (nivel == 4) {
+        numTubo = 6;
+    }
+    else if (nivel == 5) {
+        numTubo = 7;
+    }
+
     bool play = true;
     radious = imageWidth - 7;
     if (cargar == true) {
         Lt = new ListaTubo();
-        cargarPartida(windowWidth, windowHeight, "save\\Save.txt");
+        cargarPartida("save\\Save.txt");
     }
     else {
         srand(time(NULL));
@@ -540,7 +561,7 @@ void mapa(int nivel) {
                 bol[i] = 0;
             }
             Lt = new ListaTubo();
-            for (int i = 0; i < ncol + 1; i++)
+            for (int i = 0; i < numTubo + 1; i++)
             {
                 sf::Sprite sprite(image);
                 sprite.setScale(0.5f, 0.5f);
@@ -561,35 +582,13 @@ void mapa(int nivel) {
                 con += 150;
             }
 
-            if (!verificarTubos2(Lt->getIni(), ncol)) {
-                /*if (validar(Lt->getIni(), Lt->getIni(), ncol))
-                {
-                    play = false;
-                }*/
-                /*Tubo* t = Lt->getIni();
-                ListaTubo* l = new ListaTubo();
-                while (t!=NULL)
-                {
-                    Pila* p = t->getPila();
-                    l->AgregarTubo(p, t->getSf());
-                    t=t->getSig();
-                }*/
-
-
-                //
-                //guardar(t,"save\\Backup.txt");
-                //ListaTubo* l = Lt;
-                //validar(Lt->getIni(), Lt->getIni(), ncol);
-                //validar2(Lt->getIni2(), Lt->getIni2(),ncol);
-                //Lt = l;
-                /*Lt = new ListaTubo();
-                cargarPartida(windowWidth, windowHeight, "save\\Backup.txt");*/
+            if (!verificarTubos2(Lt->getIni(), ncol,numTubo)) {
                 play = false;
             }
         }
         play = true;
     }
-    
+    guardar(Lt->getIni(), "save\\Reset.txt");
     
     sf::Event event;
     bool mouseClicked = false;
@@ -615,14 +614,18 @@ void mapa(int nivel) {
                 }
                 if (btnVolver.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
                     Lt = new ListaTubo();
-                    cargarPartida(windowWidth, windowHeight, "save\\Ricovery.txt");
+                    cargarPartida("save\\Ricovery.txt");
+                }
+                if (btnReset.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+                    Lt = new ListaTubo();
+                    cargarPartida("save\\Reset.txt");
                 }
                 while (t!=NULL)
                 {
                     if (t->getSf().getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
                     {
                         if (!verificarTubos(t->getPila())) {
-                            
+                            guardar(Lt->getIni(), "save\\Ricovery.txt");
                             tubo = t->getId();
                             mouseClickedTubo = true;
                         }
@@ -745,6 +748,7 @@ void mapa(int nivel) {
         window.clear();
         window.draw(btnGuardar);
         window.draw(btnVolver);
+        window.draw(btnReset);
         Tubo* t = Lt->getIni();
         
         while (t != NULL)
@@ -775,7 +779,7 @@ void mapa(int nivel) {
             t2 = t2->getSig();
         }
         
-        if (verificarTubos2(Lt->getIni(), ncol)) {
+        if (verificarTubos2(Lt->getIni(), ncol, numTubo)) {
             //system("Pause");
             
             play = false;
@@ -783,7 +787,7 @@ void mapa(int nivel) {
         window.display();
     }
     window.close();
-    if (verificarTubos2(Lt->getIni(), ncol)) {
+    if (verificarTubos2(Lt->getIni(), ncol , numTubo)) {
         if ((nivel + 1) <= 5) {
             cargar = false;
             mapa(nivel + 1);
@@ -901,7 +905,6 @@ void menuNiveles() {
                     if (snivel1->getGlobalBounds().intersects(corMouse)) {
                         ventana2->close();
                         mapa(1);
-                        //mapa(2);
                     }
                     if (snivel2->getGlobalBounds().intersects(corMouse)) {
                         ventana2->close();
@@ -1023,7 +1026,7 @@ void menuPrincipal() {
                     if (simgPartidasGuardadas->getGlobalBounds().intersects(corMouse)) {
                         ventana1->close();
                         Lt = new ListaTubo();
-                        cargarPartida(ventana1->getSize().x/2, ventana1->getSize().y/2, "save\\Save.txt");
+                        cargarPartida("save\\Save.txt");
                         cargar = true;
                         mapa(1);
                     }

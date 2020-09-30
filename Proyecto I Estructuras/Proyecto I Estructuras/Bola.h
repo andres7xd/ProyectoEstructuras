@@ -4,7 +4,7 @@
 #include <string> 
 #include <iostream> 
 #include <SFML/Audio.hpp>
-#include "MenuInicio.h"
+#include "Menus.h"
 #include <fstream>
 
 using namespace std;

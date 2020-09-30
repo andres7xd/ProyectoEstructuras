@@ -148,14 +148,14 @@
     <ClCompile Include="Bola.cpp" />
     <ClCompile Include="ListaTubo.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MenuInicio.cpp" />
+    <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Pila.cpp" />
     <ClCompile Include="Tubo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bola.h" />
     <ClInclude Include="ListaTubo.h" />
-    <ClInclude Include="MenuInicio.h" />
+    <ClInclude Include="Menus.h" />
     <ClInclude Include="Pila.h" />
     <ClInclude Include="Tubo.h" />
   </ItemGroup>
