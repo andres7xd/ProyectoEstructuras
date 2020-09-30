@@ -475,7 +475,7 @@ void mapa(int nivel) {
     image.loadFromFile("resourse\\Tubo4.png");
     image2.loadFromFile("resourse\\TuboTope.png");
 
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Ball Sort puzzle");
 
     window.setFramerateLimit(60);
     window.setKeyRepeatEnabled(false);
