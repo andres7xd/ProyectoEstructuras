@@ -414,8 +414,8 @@ void nivel(int nivel) {
     spri2.setPosition((windowWidth*2) -80, 10);
 
     int n = (ncol) * 75;
-    bool cargar = true;
-    //bool cargar = false;
+    //bool cargar = true;
+    bool cargar = false;
     bool play = true;
     radious = imageWidth - 7;
     if (cargar == true) {
@@ -883,6 +883,11 @@ void menuPrincipal() {
                     }
                     if (ssalir->getGlobalBounds().intersects(corMouse)) {
                         ventana1->close();
+                    }
+                    if (simgPartidasGuardadas->getGlobalBounds().intersects(corMouse)) {
+                        ventana1->close();
+                        Lt = new ListaTubo();
+                        cargarPartida(ventana1->getSize().x/2, ventana1->getSize().y/2);
                     }
                 }
             }
