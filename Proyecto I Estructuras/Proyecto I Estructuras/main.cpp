@@ -1,6 +1,8 @@
 
 #include "Pila.h"
 #include "ListaTubo.h"
+
+using namespace sf;
 using namespace std;
 ListaTubo* Lt;
 float imageWidth = 0;
@@ -658,14 +660,246 @@ void nivel(int nivel) {
     }
     window.close();
 }
+
+void menuNiveles() {
+
+    int fps = 60;
+
+    Texture* nivel1;
+    nivel1 = new Texture();
+    Sprite* snivel1;
+    snivel1 = new Sprite();
+    Texture* nivel2;
+    nivel2 = new Texture();
+    Sprite* snivel2;
+    snivel2 = new Sprite();
+    Texture* nivel3;
+    nivel3 = new Texture();
+    Sprite* snivel3;
+    snivel3 = new Sprite();
+    Texture* nivel4;
+    nivel4 = new Texture();
+    Sprite* snivel4;
+    snivel4 = new Sprite();
+    Texture* nivel5;
+    nivel5 = new Texture();
+    Sprite* snivel5;
+    snivel5 = new Sprite();
+    Texture* atras;
+    atras = new Texture();
+    Sprite* satras;
+    satras = new Sprite();
+    Texture* img1;
+    img1 = new Texture();
+    Sprite* simg1;
+    simg1 = new Sprite();
+    Texture* img2;
+    img2 = new Texture();
+    Sprite* simg2;
+    simg2 = new Sprite();
+    Texture* titulo;
+    titulo = new Texture();
+    Sprite* stitulo;
+    stitulo = new Sprite();
+
+    RenderWindow* ventana2;
+
+    nivel1->loadFromFile("resourse\\Nivel1.png");
+    snivel1->setTexture(*nivel1);
+    snivel1->setPosition(320, 150);
+    snivel1->setScale(0.6f, 0.6f);
+
+    nivel2->loadFromFile("resourse\\Nivel2.png");
+    snivel2->setTexture(*nivel2);
+    snivel2->setPosition(320, 230);
+    snivel2->setScale(0.6f, 0.6);
+
+    nivel3->loadFromFile("resourse\\Nivel3.png");
+    snivel3->setTexture(*nivel3);
+    snivel3->setPosition(320, 310);
+    snivel3->setScale(0.6f, 0.6);
+
+    nivel4->loadFromFile("resourse\\Nivel4.png");
+    snivel4->setTexture(*nivel4);
+    snivel4->setPosition(320, 390);
+    snivel4->setScale(0.6f, 0.6);
+
+    nivel5->loadFromFile("resourse\\Nivel5.png");
+    snivel5->setTexture(*nivel5);
+    snivel5->setPosition(320, 470);
+    snivel5->setScale(0.6f, 0.6f);
+
+    atras->loadFromFile("resourse\\Atras.png");
+    satras->setTexture(*atras);
+    satras->setPosition(30, 550);
+    satras->setScale(0.6f, 0.6f);
+
+    img1->loadFromFile("resourse\\Img1.png");
+    simg1->setTexture(*img1);
+    simg1->setPosition(700, 100);
+    simg1->setScale(0.7f, 0.7);
+
+    img2->loadFromFile("resourse\\Img2.png");
+    simg2->setTexture(*img2);
+    simg2->setPosition(70, 100);
+    simg2->setScale(0.7f, 0.7f);
+
+    titulo->loadFromFile("resourse\\Titulo.png");
+    stitulo->setTexture(*titulo);
+    stitulo->setPosition(175, 20);
+    stitulo->setScale(0.8f, 0.8f);
+
+    ventana2 = new RenderWindow(VideoMode(800, 600), "Menu principal");
+    ventana2->setFramerateLimit(fps);
+
+    Event evento1;
+
+    while (ventana2->isOpen())
+    {
+        while (ventana2->pollEvent(evento1)) {
+            Vector2i posMouse;
+            posMouse = Mouse::getPosition(*ventana2);
+            posMouse = (Vector2i)ventana2->mapPixelToCoords(posMouse);
+            FloatRect corMouse(Vector2f(posMouse), { 10,10 });
+            switch (evento1.type) {
+            case Event::MouseButtonPressed:
+                if (Mouse::isButtonPressed(Mouse::Left)) {
+                    if (snivel1->getGlobalBounds().intersects(corMouse)) {
+                        ventana2->close();
+                        nivel(1);
+                    }
+                    if (snivel2->getGlobalBounds().intersects(corMouse)) {
+                        ventana2->close();
+                        nivel(2);
+                    }
+                    if (snivel3->getGlobalBounds().intersects(corMouse)) {
+                        ventana2->close();
+                        nivel(3);
+                    }
+                    if (snivel4->getGlobalBounds().intersects(corMouse)) {
+                        ventana2->close();
+                        nivel(4);
+                    }
+                    if (snivel5->getGlobalBounds().intersects(corMouse)) {
+                        ventana2->close();
+                        nivel(5);
+                    }
+                }
+            }
+            ventana2->clear();
+            ventana2->draw(*snivel1);
+            ventana2->draw(*snivel2);
+            ventana2->draw(*snivel3);
+            ventana2->draw(*snivel4);
+            ventana2->draw(*snivel5);
+            ventana2->draw(*simg1);
+            ventana2->draw(*simg2);
+            ventana2->draw(*stitulo);
+            ventana2->display();
+        }
+
+    }
+}
+
+void menuPrincipal() {
+
+    int fps = 60;
+
+    Texture* titulo;
+    titulo = new Texture();
+    Sprite* stitulo;
+    stitulo = new Sprite();
+    Texture* imgIniciar;
+    imgIniciar = new Texture();
+    Sprite* simgIniciar;
+    simgIniciar = new Sprite();
+    Texture* imgPartidasGuardadas;
+    imgPartidasGuardadas = new Texture();
+    Sprite* simgPartidasGuardadas;
+    simgPartidasGuardadas = new Sprite();
+    Texture* salir;
+    salir = new Texture();
+    Sprite* ssalir;
+    ssalir = new Sprite();
+    Texture* img1;
+    img1 = new Texture();
+    Sprite* simg1;
+    simg1 = new Sprite();
+    Texture* img2;
+    img2 = new Texture();
+    Sprite* simg2;
+    simg2 = new Sprite();
+
+    RenderWindow* ventana1;
+
+    titulo->loadFromFile("resourse\\Titulo.png");
+    stitulo->setTexture(*titulo);
+    stitulo->setPosition(150, 20);
+    stitulo->setScale(0.8f, 0.8f);
+
+    imgIniciar->loadFromFile("resourse\\Iniciar.png");
+    simgIniciar->setTexture(*imgIniciar);
+    simgIniciar->setPosition(295, 200);
+    simgIniciar->setScale(0.3f, 0.3f);
+
+    imgPartidasGuardadas->loadFromFile("resourse\\PartidaGuardada.png");
+    simgPartidasGuardadas->setTexture(*imgPartidasGuardadas);
+    simgPartidasGuardadas->setPosition(220, 300);
+    simgPartidasGuardadas->setScale(0.5f, 0.5f);
+
+    salir->loadFromFile("resourse\\Salir.png");
+    ssalir->setTexture(*salir);
+    ssalir->setPosition(310, 400);
+    ssalir->setScale(0.3f, 0.3f);
+
+    img1->loadFromFile("resourse\\Img1.png");
+    simg1->setTexture(*img1);
+    simg1->setPosition(700, 300);
+    simg1->setScale(0.7f, 0.7);
+
+    img2->loadFromFile("resourse\\Img2.png");
+    simg2->setTexture(*img2);
+    simg2->setPosition(70, 300);
+    simg2->setScale(0.7f, 0.7f);
+
+    ventana1 = new RenderWindow(VideoMode(800, 600), "Menu principal");
+    ventana1->setFramerateLimit(fps);
+
+    Event evento1;
+
+    while (ventana1->isOpen())
+    {
+        while (ventana1->pollEvent(evento1)) {
+            Vector2i posMouse;
+            posMouse = Mouse::getPosition(*ventana1);
+            posMouse = (Vector2i)ventana1->mapPixelToCoords(posMouse);
+            FloatRect corMouse(Vector2f(posMouse), { 10,10 });
+            switch (evento1.type) {
+            case Event::MouseButtonPressed:
+                if (Mouse::isButtonPressed(Mouse::Left)) {
+                    if (simgIniciar->getGlobalBounds().intersects(corMouse)) {
+                        ventana1->close();
+                        menuNiveles();
+                    }
+                    if (ssalir->getGlobalBounds().intersects(corMouse)) {
+                        ventana1->close();
+                    }
+                }
+            }
+        }
+        ventana1->clear();
+        ventana1->draw(*stitulo);
+        ventana1->draw(*simgIniciar);
+        ventana1->draw(*simgPartidasGuardadas);
+        ventana1->draw(*ssalir);
+        ventana1->draw(*simg1);
+        ventana1->draw(*simg2);
+        ventana1->display();
+    }
+}
 int main()
 {
-    nivel(1);
-    
-    /*nivel(2);
-    nivel(3);
-    nivel(4);
-    nivel(5);*/
+    menuPrincipal();
 
     return 0;
 }
