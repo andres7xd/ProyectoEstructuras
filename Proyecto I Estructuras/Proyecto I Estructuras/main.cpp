@@ -12,6 +12,7 @@ float imageHeight2 = 0;
 int tubosllenos = 0;
 sf::Texture image;
 sf::Texture image2;
+bool cargar = false;
 
 MenuInicio* m = new MenuInicio();
 
@@ -143,6 +144,34 @@ bool verificarTubos(Pila* pila) {
     }
     return false;
 }
+bool verificarTubos2(Tubo* tubo, int ncol) {
+    int tubLL = 0;
+    for (int i = 0; i <= ncol; i++)
+    {
+        Bola* bola = tubo->getPila()->top();
+        int n = 0;
+        Bola* aux = bola;
+        while (bola != NULL)
+        {
+            if (bola->getColor() == aux->getColor()) {
+                n++;
+            }
+            else {
+                return false;
+            }
+            aux = bola;
+            bola = bola->getAnt();
+        }
+        if (n == 4) {
+            tubLL++;
+        }
+        tubo = tubo->getSig();
+    }
+    if (tubLL == ncol) {
+        return true;
+    }
+    return false;
+}
 int contarBolasColor(Pila* pila) {
     Bola* tubo = pila->top();
     int n = 0;
@@ -260,62 +289,120 @@ bool validar(Tubo* t,Tubo*t2, int ncol) {
     }
     
 }
-void guardar(Tubo* tubo, sf::Sprite sprite, float x, float y) {
-    if (sprite.getGlobalBounds().contains(x, y)) {
-        string dato = "";
-        ofstream file;
-        file.open("save\\archivo.txt");
-        
-        while (tubo!=NULL)
-        {
-            dato = "!";
-            Bola* b = tubo->getPila()->top();
-            string dato2 = "";
-            while (b!=NULL)
-            {
-                string color = b->getColor();
-                if (color=="Blue") {
-                    dato2 = "@" + dato2;
+bool validar2(Tubo* tubo, Tubo* tubo2, int ncol) {
+    Tubo* t = tubo;
+    Tubo* t2 = tubo2;
+    while (t != NULL) {
+        if (t2 != NULL) {
+            if (t != t2) {
+                if (t->getPila()->top() != NULL) {
+                    Bola* b = t->getPila()->top();
+
+                    cout << b->getColor() << endl;
+                    if (t2->getPila() != NULL) {
+                        ///bool var = true;
+                        //while (var == true)
+                        //{
+                        if (t2->getPila()->top() != NULL) {
+                            Bola* b2 = t2->getPila()->top();
+                            cout << b2->getColor() << endl;
+
+
+                            if (b2->getIdTubo() < 4) {
+                                if (b->getColor() == b2->getColor()) {
+                                    if (!verificarTubos(t2->getPila())) {
+                                        b = t->getPila()->pop();
+                                        guardarBola(t2->getPila(), t2->getSf(), b->getShape(), b->getColor());
+                                        if (validar2(tubo, tubo2, ncol)) {
+                                            //var = false;
+                                            return true;
+                                        }
+
+                                    }
+                                }
+                            }
+
+                        }
+                        else {
+                            b = t->getPila()->pop();
+                            //t->getSig()->getPila()->push(b->getShape(), b->getColor());
+                            guardarBola(t2->getPila(), t2->getSf(), b->getShape(), b->getColor());
+                            //var = false;
+                        }
+                        //}
+                    }
                 }
-                else if(color == "White"){
-                    dato2 = "#" + dato2;
+                else if (validar2(tubo, tubo2->getSig(), ncol)) {
+                    return true;
                 }
-                else if (color == "Green") {
-                    dato2 = "$" + dato2;
-                }
-                else if (color == "Red") {
-                    dato2 = "%" + dato2;
-                }
-                else if (color == "Magenta") {
-                    dato2 = "&" + dato2;
-                }
-                else if (color == "Yellow") {
-                    dato2 = "*" + dato2;
-                }
-                b = b->getAnt();
             }
-            tubo = tubo->getSig();
-            file << dato + dato2 + "\n";
+
         }
-        file.close();
+        t = t->getSig();
     }
-    
+    if (verificarTubos2(tubo, ncol)) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
-void cargarPartida(float windowWidth, float windowHeight) {
-   
+void guardar(Tubo* tubo, string f) {
+
+    string dato = "";
+    ofstream file;
+    file.open(f);
+
+    while (tubo != NULL)
+    {
+        dato = "!";
+        Bola* b = tubo->getPila()->top();
+        string dato2 = "";
+        while (b != NULL)
+        {
+            string color = b->getColor();
+            if (color == "Blue") {
+                dato2 = "@" + dato2;
+            }
+            else if (color == "White") {
+                dato2 = "#" + dato2;
+            }
+            else if (color == "Green") {
+                dato2 = "$" + dato2;
+            }
+            else if (color == "Red") {
+                dato2 = "%" + dato2;
+            }
+            else if (color == "Magenta") {
+                dato2 = "&" + dato2;
+            }
+            else if (color == "Yellow") {
+                dato2 = "*" + dato2;
+            }
+            b = b->getAnt();
+        }
+        tubo = tubo->getSig();
+        file << dato + dato2 + "\n";
+    }
+    file.close();
+
+}
+void cargarPartida(float windowWidth, float windowHeight, string f) {
+
     char cadena[5];
+
     int con = 0;
     int ncol = 0;
     char cadena2[5];
-    ifstream fe2("save\\archivo.txt");
+    ifstream fe2(f);
     while (!fe2.eof()) {
         ncol++;
         fe2 >> cadena2;
     }
     fe2.close();
     ncol -= 1;
-    int n = (ncol) * 75;
-    ifstream fe("save\\archivo.txt");
+    int n = (ncol - 1) * 75;
+    ifstream fe(f);
     int contador = 0;
     while (!fe.eof()) {
         fe >> cadena;
@@ -324,8 +411,11 @@ void cargarPartida(float windowWidth, float windowHeight) {
             sprite.setScale(0.5f, 0.5f);
             sprite.setPosition((windowWidth - n) + con - imageWidth, windowHeight - imageHeight);
             Pila* p = new Pila();
-            for (int i = 1; i < 5; i++)
-            {
+            /*for (int i = 1; i < 5; i++)
+            {*/
+            int i = 1;
+            while (cadena[i] != 0) {
+
 
                 switch (cadena[i])
                 {
@@ -351,7 +441,9 @@ void cargarPartida(float windowWidth, float windowHeight) {
 
                 default: break;
                 }
+
                 cadena[i] = ' ';
+                i++;
             }
             Lt->AgregarTubo(p, sprite);
             con += 150;
@@ -360,7 +452,7 @@ void cargarPartida(float windowWidth, float windowHeight) {
     }
     fe.close();
 }
-void nivel(int nivel) {
+void mapa(int nivel) {
     //ListaTubo
     
     int tubo = 0;
@@ -409,18 +501,23 @@ void nivel(int nivel) {
 
     sf::Texture image3;
     image3.loadFromFile("resourse\\Guardar.png");
-    sf::Sprite spri2(image3);
-    spri.setScale(0.5f, 0.5f);
-    spri2.setPosition((windowWidth*2) -80, 10);
+    sf::Sprite btnGuardar(image3);
+    //btnGuardar.setScale(0.5f, 0.5f);
+    btnGuardar.setPosition((windowWidth * 2) - 80, 10);
+    //sf::Texture image4;
+    //image4.loadFromFile("resourse\\Guardar.png");
+    sf::Sprite btnVolver(image3);
+    //btnGuardar.setScale(0.5f, 0.5f);
+    btnVolver.setPosition((windowWidth * 2) - 160, 10);
 
     int n = (ncol) * 75;
     //bool cargar = true;
-    bool cargar = false;
+    
     bool play = true;
     radious = imageWidth - 7;
     if (cargar == true) {
         Lt = new ListaTubo();
-        cargarPartida(windowWidth, windowHeight);
+        cargarPartida(windowWidth, windowHeight, "save\\Save.txt");
     }
     else {
         srand(time(NULL));
@@ -463,10 +560,32 @@ void nivel(int nivel) {
                 Lt->AgregarTubo(pil, sprite);
                 con += 150;
             }
-            //if (validar(Lt->getIni(), Lt->getIni(),ncol))
-            //{
-            play = false;
-            //}
+
+            if (!verificarTubos2(Lt->getIni(), ncol)) {
+                /*if (validar(Lt->getIni(), Lt->getIni(), ncol))
+                {
+                    play = false;
+                }*/
+                /*Tubo* t = Lt->getIni();
+                ListaTubo* l = new ListaTubo();
+                while (t!=NULL)
+                {
+                    Pila* p = t->getPila();
+                    l->AgregarTubo(p, t->getSf());
+                    t=t->getSig();
+                }*/
+
+
+                //
+                //guardar(t,"save\\Backup.txt");
+                //ListaTubo* l = Lt;
+                //validar(Lt->getIni(), Lt->getIni(), ncol);
+                //validar2(Lt->getIni2(), Lt->getIni2(),ncol);
+                //Lt = l;
+                /*Lt = new ListaTubo();
+                cargarPartida(windowWidth, windowHeight, "save\\Backup.txt");*/
+                play = false;
+            }
         }
         play = true;
     }
@@ -491,7 +610,13 @@ void nivel(int nivel) {
             {
                 mouseClicked = true;
                 Tubo* t = Lt->getIni();
-                guardar(t, spri2, event.mouseButton.x, event.mouseButton.y);
+                if (btnGuardar.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+                    guardar(t, "save\\Save.txt");
+                }
+                if (btnVolver.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+                    Lt = new ListaTubo();
+                    cargarPartida(windowWidth, windowHeight, "save\\Ricovery.txt");
+                }
                 while (t!=NULL)
                 {
                     if (t->getSf().getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
@@ -618,7 +743,8 @@ void nivel(int nivel) {
         }
         
         window.clear();
-        window.draw(spri2);
+        window.draw(btnGuardar);
+        window.draw(btnVolver);
         Tubo* t = Lt->getIni();
         
         while (t != NULL)
@@ -649,16 +775,24 @@ void nivel(int nivel) {
             t2 = t2->getSig();
         }
         
-        if (tubosllenos==nivel+1)
-        {
+        if (verificarTubos2(Lt->getIni(), ncol)) {
             //system("Pause");
+            
             play = false;
         }
-
-        
         window.display();
     }
     window.close();
+    if (verificarTubos2(Lt->getIni(), ncol)) {
+        if ((nivel + 1) <= 5) {
+            cargar = false;
+            mapa(nivel + 1);
+        }
+        //menuPrincipal();
+    }
+    
+    
+    
 }
 
 void menuNiveles() {
@@ -766,23 +900,24 @@ void menuNiveles() {
                 if (Mouse::isButtonPressed(Mouse::Left)) {
                     if (snivel1->getGlobalBounds().intersects(corMouse)) {
                         ventana2->close();
-                        nivel(1);
+                        mapa(1);
+                        //mapa(2);
                     }
                     if (snivel2->getGlobalBounds().intersects(corMouse)) {
                         ventana2->close();
-                        nivel(2);
+                        mapa(2);
                     }
                     if (snivel3->getGlobalBounds().intersects(corMouse)) {
                         ventana2->close();
-                        nivel(3);
+                        mapa(3);
                     }
                     if (snivel4->getGlobalBounds().intersects(corMouse)) {
                         ventana2->close();
-                        nivel(4);
+                        mapa(4);
                     }
                     if (snivel5->getGlobalBounds().intersects(corMouse)) {
                         ventana2->close();
-                        nivel(5);
+                        mapa(5);
                     }
                 }
             }
@@ -879,6 +1014,7 @@ void menuPrincipal() {
                 if (Mouse::isButtonPressed(Mouse::Left)) {
                     if (simgIniciar->getGlobalBounds().intersects(corMouse)) {
                         ventana1->close();
+                        cargar = false;
                         menuNiveles();
                     }
                     if (ssalir->getGlobalBounds().intersects(corMouse)) {
@@ -887,7 +1023,9 @@ void menuPrincipal() {
                     if (simgPartidasGuardadas->getGlobalBounds().intersects(corMouse)) {
                         ventana1->close();
                         Lt = new ListaTubo();
-                        cargarPartida(ventana1->getSize().x/2, ventana1->getSize().y/2);
+                        cargarPartida(ventana1->getSize().x/2, ventana1->getSize().y/2, "save\\Save.txt");
+                        cargar = true;
+                        mapa(1);
                     }
                 }
             }
